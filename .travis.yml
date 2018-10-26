@@ -23,7 +23,7 @@ env:
     - LLVM_VERSION=7.0.0 BUILD_SYSTEM=CMAKE CXX_=g++-4.9 CC_=gcc-4.9 HALIDE_SHARED_LIBRARY=1
 cache: apt ccache
 dist: trusty
-# Note the commands below are written assuming Ubuntu 12.04LTS
+# Note the commands below are written assuming Ubuntu 14.04LTS
 before_install:
   # Needed for new libstdc++ and gcc4.9
   - export CXX=${CXX_}
