@@ -18,14 +18,14 @@ env:
     #
     # Test a mix of llvm versions, a mix of build systems, and a mix of shared vs static library
     # Don't build as a static library with cmake. It risks exceeding the travis memory limit.
-    - LLVM_VERSION=7.0.0 BUILD_SYSTEM=MAKE CXX_=g++-5.3 CC_=gcc-5.3
-    - LLVM_VERSION=6.0.0 BUILD_SYSTEM=MAKE CXX_=g++-5.3 CC_=gcc-5.3
-    - LLVM_VERSION=7.0.0 BUILD_SYSTEM=CMAKE CXX_=g++-5.3 CC_=gcc-5.3 HALIDE_SHARED_LIBRARY=1
+    - LLVM_VERSION=7.0.0 BUILD_SYSTEM=MAKE CXX_=g++-4.8 CC_=gcc-4.8
+    - LLVM_VERSION=6.0.0 BUILD_SYSTEM=MAKE CXX_=g++-4.8 CC_=gcc-4.8
+    - LLVM_VERSION=7.0.0 BUILD_SYSTEM=CMAKE CXX_=g++-4.8 CC_=gcc-4.8 HALIDE_SHARED_LIBRARY=1
 cache: apt ccache
 dist: trusty
-# Note the commands below are written assuming Ubuntu 16.04LTS
+# Note the commands below are written assuming Ubuntu 14.04LTS
 before_install:
-  # Needed for new libstdc++ and gcc5.3
+  # Needed for new libstdc++ and gcc4.8
   - export CXX=${CXX_}
   - export CC=${CC_}
   - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test/
@@ -34,7 +34,7 @@ before_install:
   - sudo dpkg -i bazel_"${BAZEL_VERSION}"-linux-x86_64.deb
 install:
   - sudo apt-get -y --force-yes install ${CXX} ${CC} libedit-dev
-  # Make gcc5.3 the default gcc version
+  # Make gcc4.8 the default gcc version
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/${CC} 20
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/${CXX} 20
   # Download the right llvm release
