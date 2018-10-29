@@ -32,7 +32,7 @@ if [ ${BUILD_SYSTEM} = 'CMAKE' ]; then
         ../
 
   # Build and run internal tests
-  make ${MAKEFLAGS} correctness_cross_compilation
+  make ${MAKEFLAGS} run_correctness_cross_compilation
   # make ${MAKEFLAGS} test_internal
 
   # # Build the docs and run the tests
