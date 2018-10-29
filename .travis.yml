@@ -3,14 +3,6 @@ compiler:
   # Comment out for now to keep build matrix small
   #- clang
   - gcc
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - gcc-5
-      - g++-5
-      - cmake
 env:
   global:
     - BAZEL_VERSION="0.6.1"
@@ -26,15 +18,15 @@ env:
     #
     # Test a mix of llvm versions, a mix of build systems, and a mix of shared vs static library
     # Don't build as a static library with cmake. It risks exceeding the travis memory limit.
-    - LLVM_VERSION=7.0.0 BUILD_SYSTEM=MAKE CXX_=g++-5 CC_=gcc-5
-    # - LLVM_VERSION=6.0.0 BUILD_SYSTEM=MAKE CXX_=g++-5 CC_=gcc-5
-    - LLVM_VERSION=7.0.0 BUILD_SYSTEM=CMAKE CXX_=g++-5 CC_=gcc-5 HALIDE_SHARED_LIBRARY=1
+    - LLVM_VERSION=7.0.0 BUILD_SYSTEM=MAKE CXX_=g++-4.8 CC_=gcc-4.8
+    # - LLVM_VERSION=6.0.0 BUILD_SYSTEM=MAKE CXX_=g++-4.8 CC_=gcc-4.8
+    - LLVM_VERSION=7.0.0 BUILD_SYSTEM=CMAKE CXX_=g++-4.8 CC_=gcc-4.8 HALIDE_SHARED_LIBRARY=1
 cache: apt ccache
 dist: trusty
 sudo: require
 # Note the commands below are written assuming Ubuntu 14.04LTS
 before_install:
-  # Needed for new libstdc++ and gcc5
+  # Needed for new libstdc++ and gcc4.8
   - export CXX=${CXX_}
   - export CC=${CC_}
   - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test/
@@ -54,5 +46,9 @@ install:
   - sudo apt-get -y --force-yes install libpng-dev
   # For generating docs
   - sudo apt-get -y --force-yes --no-install-recommends install doxygen
+  # Grab a version of CMake >= 3.4
+  - wget --no-check-certificate https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.sh
+  - chmod a+x cmake-3.5.2-Linux-x86_64.sh
+  - sudo ./cmake-3.5.2-Linux-x86_64.sh --skip-license --prefix=/usr/local
 script:
   - test/scripts/build_travis.sh
