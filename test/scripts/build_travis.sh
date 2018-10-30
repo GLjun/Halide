@@ -33,12 +33,6 @@ if [ ${BUILD_SYSTEM} = 'CMAKE' ]; then
 
   # Build and run internal tests
   make ${MAKEFLAGS} run_correctness_cross_compilation
-  # make ${MAKEFLAGS} test_internal
-
-  # # Build the docs and run the tests
-  # make doc
-  # make ${MAKEFLAGS} test_correctness
-  # make ${MAKEFLAGS} test_generator
 
 elif [ ${BUILD_SYSTEM} = 'MAKE' ]; then
   export LLVM_CONFIG=/usr/local/llvm/bin/llvm-config
@@ -51,20 +45,6 @@ elif [ ${BUILD_SYSTEM} = 'MAKE' ]; then
   # make ${MAKEFLAGS}
 
   # Build the docs and run the tests
-  # make doc
-  # make ${MAKEFLAGS} test_correctness
-  # make ${MAKEFLAGS} test_generator
-
-  # # Build the distrib folder (needed for the Bazel build test)
-  # make distrib
-
-  # # Build our one-and-only Bazel test.
-  # # --verbose_failures so failures are easier to figure out.
-  # echo "Testing apps/bazeldemo..."
-  # cd apps/bazeldemo
-  # bazel build --verbose_failures :all
-
-else
   echo "Unexpected BUILD_SYSTEM: \"${BUILD_SYSTEM}\""
   exit 1
 fi
