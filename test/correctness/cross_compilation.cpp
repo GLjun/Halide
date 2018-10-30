@@ -16,7 +16,10 @@ int main(int argc, char **argv) {
     f(x) = x;
 
     std::string targets[] = {
-        "arm-64-android",
+        "arm-32-linux",
+        "arm-64-linux",
+
+//        "arm-64-android",
         "arm-32-android",
         "arm-32-ios",
         // "x86-64-linux",
@@ -25,7 +28,7 @@ int main(int argc, char **argv) {
         "x86-32-osx",
         // "x86-64-windows",
         // "x86-32-windows",
-        "arm-64-ios",
+//        "arm-64-ios",
         // "mips-32-android"
     };
 
